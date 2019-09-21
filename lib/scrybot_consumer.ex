@@ -15,7 +15,7 @@ defmodule Scrybot.Consumer do
         card = name
           |> String.replace(" ", "+")
           |> String.replace(~r(\r|\n), "")
-          |> Scrybot.fetch_card
+          |> Scrybot.Cache.get_cache
         Api.create_message(msg.channel_id, card)
       "!random" ->
         card = Scrybot.fetch_random
