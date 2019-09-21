@@ -6,12 +6,13 @@ defmodule Scrybot do
   def fetch_card name do
     Scrybot.Scryfall.get!(name)
       |> handle_response
-      |> case do
-      {:ok, res} -> res
-        |> get_body
-        |> extract_info
-      {:error, res} -> res
-    end
+      |> format_response
+  end
+
+  def fetch_random do
+    Scrybot.Scryfall.get!("thisisthecodeforarandomcard")
+      |> handle_response
+      |> format_response
   end
 
   def get_body res do
@@ -46,5 +47,15 @@ defmodule Scrybot do
       404 -> {:error, "Scryfall couldn't find any card using that query! Please try again with a different query."}
       _ -> {:error, "Something went wrong. Please try again or contact the developer for details. The developer is probably just not great at this."}
     end
+  end
+
+  def format_response {:ok, res} do
+    res
+    |> get_body
+    |> extract_info
+  end
+
+  def format_response {:error, res} do
+    res
   end
 end

@@ -17,6 +17,9 @@ defmodule Scrybot.Consumer do
           |> String.replace(~r(\r|\n), "")
           |> Scrybot.fetch_card
         Api.create_message(msg.channel_id, card)
+      "!random" ->
+        card = Scrybot.fetch_random
+        Api.create_message(msg.channel_id, card)
       _ ->
         :ignore
     end

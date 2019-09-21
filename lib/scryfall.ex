@@ -4,6 +4,10 @@ defmodule Scrybot.Scryfall do
     name image_uris oracle_text scryfall_uri
   )
 
+  def process_request_url "thisisthecodeforarandomcard" do
+    "https://api.scryfall.com/cards/random"
+  end
+
   def process_request_url url do
     "https://api.scryfall.com/cards/named?fuzzy=" <> url
   end
